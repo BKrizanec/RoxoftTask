@@ -119,6 +119,5 @@ public class BookRepository : IBookRepository
             await Console.Out.WriteLineAsync(ex.Message);
             throw;
         }
-    }
-    
+    }    
 }

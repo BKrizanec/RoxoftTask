@@ -13,28 +13,13 @@ public class BookService : IBookService
         _bookRepository = bookRepository;
     }
 
-    public async Task<List<Book>> GetBooksAsync()
-    {
-        return await _bookRepository.GetBooksAsync();
-    }
-    public async Task<Book> GetBookByIdAsync(int id)
-    {
-        return await _bookRepository.GetBookByIdAsync(id);
-    }
+    public Task<List<Book>> GetBooksAsync() => _bookRepository.GetBooksAsync();
 
-    public async Task<bool> AddBookAsync(Book book)
-    {
-        return await _bookRepository.AddBookAsync(book);
-    }
+    public Task<Book> GetBookByIdAsync(int id) => _bookRepository.GetBookByIdAsync(id);
 
-    public async Task<bool> DeleteBookAsync(int id)
-    {
-        return await _bookRepository.DeleteBookAsync(id);
-    }
+    public Task<bool> AddBookAsync(Book book) => _bookRepository.AddBookAsync(book);
 
-    public async Task<bool> UpdateBookAsync(int id, Book book)
-    {
-        return await _bookRepository.UpdateBookAsync(id, book);
-    }        
+    public Task<bool> DeleteBookAsync(int id) => _bookRepository.DeleteBookAsync(id);
 
+    public Task<bool> UpdateBookAsync(int id, Book book) => _bookRepository.UpdateBookAsync(id, book);
 }
