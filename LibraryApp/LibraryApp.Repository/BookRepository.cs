@@ -24,7 +24,7 @@ public class BookRepository : IBookRepository
     {       
         try
         {          
-            return _books = await _context.Books.ToListAsync();
+            return _books = await _context.Books.Include(a => a.AuthorNavigation).ToListAsync();
         }
         catch (Exception ex)
         {
@@ -37,9 +37,10 @@ public class BookRepository : IBookRepository
     {
         try
         {
-            Book findBook = new Book();
-            return findBook = await _context.Books.FindAsync(id);
-            
+            Book findBook = await _context.Books
+                .Include(a => a.AuthorNavigation)
+                .FirstOrDefaultAsync(b => b.BookId == id);
+            return findBook;            
         }
         catch (Exception ex)
         {
@@ -54,8 +55,8 @@ public class BookRepository : IBookRepository
 
         try 
         {
-            Book newBook = book;
-            _books.Add(newBook);
+            _context.Books.Add(book);
+            await _context.SaveChangesAsync();
             return true;
         } 
         catch (Exception ex) 
@@ -72,10 +73,16 @@ public class BookRepository : IBookRepository
 
         try
         {
-            Book deleteBook = new Book();
-            deleteBook = await GetBookByIdAsync(id);
-            _context.Books.Remove(deleteBook);
-            return true;
+            Book deleteBook = await GetBookByIdAsync(id);
+
+            if (deleteBook != null)
+            {
+                _context.Books.Remove(deleteBook);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+                return false;
         }
         catch (Exception ex)
         {
@@ -92,6 +99,9 @@ public class BookRepository : IBookRepository
         try
         {
             Book updateBook = await GetBookByIdAsync(id);
+
+            if (updateBook == null)
+                return false;
             
             if(book.Title != null)
                 updateBook.Title = book.Title;
@@ -100,7 +110,7 @@ public class BookRepository : IBookRepository
             else if(book.Author != null)
                 updateBook.Author = book.Author;
 
-            _context.Books.Update(updateBook);
+            await _context.SaveChangesAsync();            
 
             return true;
         }
