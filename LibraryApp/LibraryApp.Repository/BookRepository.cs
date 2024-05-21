@@ -15,11 +15,13 @@ public class BookRepository : IBookRepository
         {
             _context = context;
         }
+
         if(_books == null)
         {
             _books = new List<Book>();
         }
     }
+
     public async Task<List<Book>> GetBooksAsync()
     {       
         try
@@ -48,6 +50,7 @@ public class BookRepository : IBookRepository
             throw;
         }
     }
+
     public async Task<bool> AddBookAsync(Book book)
     {
         if (book == null)
