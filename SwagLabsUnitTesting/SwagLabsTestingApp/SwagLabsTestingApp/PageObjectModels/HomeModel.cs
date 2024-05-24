@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenQA.Selenium;
 
-namespace SwagLabsTestingApp.PageObjectModels
+namespace SwagLabsTestingApp.PageObjectModels;
+
+public class HomeModel
 {
-    internal class HomeModel
-    {
-    }
+    public IWebElement ItemDescription { get; set; }
+    public IWebElement ItemImage { get; set; }
+    public IWebElement ItemTitle { get; set;}
+    public IWebElement ItemPrice { get; set;}
 }

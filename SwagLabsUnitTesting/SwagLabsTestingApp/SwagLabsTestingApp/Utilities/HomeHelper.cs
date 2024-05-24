@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SwagLabsTestingApp.Utilities;
 
-namespace SwagLabsTestingApp.Utilities
+public class HomeHelper
 {
-    internal class HomeHelper
+    public const string inventoryUrl = LoginHelper.loginUrl + LoginHelper.successfulLoginEndpoint;
+    public const int maxNumberOfItems = 6;
+    public static readonly Dictionary<string, string> SortingOptions = new Dictionary<string, string>
     {
-    }
+        { "NameAscending", "az" },
+        { "NameDescending", "za" },
+        { "PriceLowToHigh", "lohi" },
+        { "PriceHighToLow", "hilo" }
+    };
 }
