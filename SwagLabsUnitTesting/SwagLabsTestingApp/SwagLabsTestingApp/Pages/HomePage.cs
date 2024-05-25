@@ -33,11 +33,13 @@ public class HomePage
     {
         var items = new List<HomeModel>();
 
-        foreach (var itemContainer in ItemContainers)
+        var itemContainers = ItemContainers;
+
+        foreach (var itemContainer in itemContainers)
         {
             var item = new HomeModel
             {
-                ItemDescription = itemContainer.FindElement(By.ClassName("inventory_item_desc")),
+                ItemDescription = WaitForElement(By.ClassName("inventory_item_desc"), itemContainer),
                 ItemImage = itemContainer.FindElement(By.ClassName("inventory_item_img")),
                 ItemTitle = itemContainer.FindElement(By.ClassName("inventory_item_name")),
                 ItemPrice = itemContainer.FindElement(By.ClassName("inventory_item_price"))
@@ -92,5 +94,11 @@ public class HomePage
     public List<decimal> GetInventoryItemPrices()
     {
         return ItemPrices.Select(p => Decimal.Parse(p.Text.Replace("$", ""))).ToList();
+    }
+
+    private IWebElement WaitForElement(By by, IWebElement container, int timeoutInSeconds = 10)
+    {
+        WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
+        return wait.Until(driver => container.FindElement(by));
     }
 }

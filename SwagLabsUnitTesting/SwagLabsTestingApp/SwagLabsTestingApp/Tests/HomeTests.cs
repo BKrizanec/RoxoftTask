@@ -32,9 +32,9 @@ public class HomeTests
     {
         List<HomeModel> inventoryItems = _homePage.GetInventoryItems();
 
-        Assert.That(inventoryItems.Count(), Is.EqualTo(HomeHelper.maxNumberOfItems), "Number of Items is not as expected");
+        Assert.That(inventoryItems.Count, Is.EqualTo(HomeHelper.maxNumberOfItems), "Number of Items is not as expected");
 
-        foreach (HomeModel item in inventoryItems)
+        foreach (var item in inventoryItems)
         {
             Assert.That(item.ItemDescription, Is.Not.Null, "Item description is null");
             Assert.That(item.ItemDescription.Displayed, Is.True, "Item description is not displayed");
@@ -69,6 +69,9 @@ public class HomeTests
         Assert.That(cartLink.Displayed, Is.True, "The cart link is not displayed");
         Assert.That(cartLink.Enabled, Is.True, "The cart link is not enabled");
         cartLink.Click();
+
+        string currentUrl = _driver.Url;
+        Assert.That(currentUrl, Is.EqualTo(HomeHelper.cartUrl), $"Expected URL: {HomeHelper.cartUrl}, Actual URL: {currentUrl}");
     }
 
     [Test]
@@ -98,24 +101,34 @@ public class HomeTests
     public void AllItems_MainMenu_IsClickable()
     {
         MainMenuButtonClicker(_homePage.AllItemsMainMenu);
+        Assert.That(_driver.Url, Is.EqualTo(HomeHelper.inventoryUrl), "Unexpected URL after clicking All Items menu item.");
     }
 
     [Test]
-    public void About_MainMenu_IsClickabl()
+    public void About_MainMenu_IsClickable()
     {
         MainMenuButtonClicker(_homePage.AboutMainMenu);
+        Assert.That(_driver.Url, Is.EqualTo(HomeHelper.aboutUrl), "Unexpected URL after clicking About menu item.");
+
     }
 
     [Test]
     public void Logout_MainMenu_IsClickable()
     {
         MainMenuButtonClicker(_homePage.LogoutMainMenu);
+        Assert.That(_driver.Url, Is.EqualTo(LoginHelper.loginUrl), "Unexpected URL after clicking Logout menu item.");
     }
 
     [Test]
     public void ResetAppState_MainMenu_IsClickable()
     {
-        MainMenuButtonClicker(_homePage.ResetAppStateMainMenu);
+        AddItemsToCart();        
+        MainMenuButtonClicker(_homePage.ResetAppStateMainMenu);        
+
+        Assert.That(_driver.Url, Is.EqualTo(HomeHelper.inventoryUrl), "Unexpected URL after clicking Reset App State menu item.");
+        int cartItemCount = _homePage.GetCartItemCount();
+        int expectedItemCount = 0;
+        Assert.That(cartItemCount, Is.EqualTo(expectedItemCount), "There is an issue with the Reset App State");        
     }
 
     [TearDown]
@@ -199,7 +212,11 @@ public class HomeTests
     private void MainDropdownClicker()
     {
         IWebElement dropdownButton = _homePage.MainMenuButton;
+        Assert.That(dropdownButton, Is.Not.Null, "The element is null");
+        Assert.That(dropdownButton.Displayed, "The element is not displayed");
+        Assert.That(dropdownButton.Enabled, "The element is not enabled");
         dropdownButton.Click();
     }
+    
     #endregion
 }
