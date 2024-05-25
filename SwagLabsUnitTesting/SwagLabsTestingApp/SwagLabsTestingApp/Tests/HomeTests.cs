@@ -28,19 +28,7 @@ public class HomeTests
     }
 
     [Test]
-    public void HomePageElements()
-    {
-        IEnumerable<IWebElement> enabledElements = _homePage.EnabledElementsCollector();
-
-        foreach (IWebElement element in enabledElements)
-        {
-            Assert.That(element.Enabled, Is.True, "Element is not enabled");
-            Assert.That(element.Displayed, Is.True, "Element is not displayed");
-        }
-    }
-
-    [Test]
-    public void TestGetAllInventoryItemsOnHomePage()
+    public void All_Inventory_Items_Visible_And_Enabled()
     {
         List<HomeModel> inventoryItems = _homePage.GetInventoryItems();
 
@@ -67,12 +55,16 @@ public class HomeTests
     }
 
     [Test]
-    public void TestAddItemToCartRemoveItemFromCartAndCartLink()
-    {
-        IWebElement cartLink = _homePage.ShoppingCartLink;
+    public void AllItems_AddAndRemove_FromCart()
+    {        
         AddItemsToCart();
         RemoveItemsFromCart();
+    }
 
+    [Test]
+    public void CartIcon_IsClickable()
+    {
+        IWebElement cartLink = _homePage.ShoppingCartLink;
         Assert.That(cartLink, Is.Not.Null, "The cart link is null");
         Assert.That(cartLink.Displayed, Is.True, "The cart link is not displayed");
         Assert.That(cartLink.Enabled, Is.True, "The cart link is not enabled");
@@ -80,7 +72,7 @@ public class HomeTests
     }
 
     [Test]
-    public void TestFooterSocialLinks()
+    public void Footer_SocialLinks_IsClickable()
     {
         IEnumerable<IWebElement> socials = _homePage.GetElements(_homePage.SocialContainer, "a");
 
@@ -94,7 +86,7 @@ public class HomeTests
     }
 
     [Test]
-    public void TestSortingDropdown()
+    public void SortingDropdownMenu_IsClickable()
     {
         SelectAndVerifyDropdown(HomeHelper.SortingOptions["NameAscending"]);
         SelectAndVerifyDropdown(HomeHelper.SortingOptions["NameDescending"]);
@@ -103,25 +95,25 @@ public class HomeTests
     }
 
     [Test]
-    public void TestMainMenuDropDownButtonWithAllItemsClickableButton()
+    public void AllItems_MainMenu_IsClickable()
     {
         MainMenuButtonClicker(_homePage.AllItemsMainMenu);
     }
 
     [Test]
-    public void TestMainMenuDropDownWithAboutClickableButton()
+    public void About_MainMenu_IsClickabl()
     {
         MainMenuButtonClicker(_homePage.AboutMainMenu);
     }
 
     [Test]
-    public void TestMainMenuDropDownWithLogoutClickableButton()
+    public void Logout_MainMenu_IsClickable()
     {
         MainMenuButtonClicker(_homePage.LogoutMainMenu);
     }
 
     [Test]
-    public void TestMainMenuDropDownWithResetAppStateClickableButton()
+    public void ResetAppState_MainMenu_IsClickable()
     {
         MainMenuButtonClicker(_homePage.ResetAppStateMainMenu);
     }

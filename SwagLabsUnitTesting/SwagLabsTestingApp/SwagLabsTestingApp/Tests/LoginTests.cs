@@ -22,7 +22,7 @@ public class LoginTests
     }
 
     [Test]
-    public void LoginFormEnabledElements()
+    public void LoginForm_Element_IsDisplayed()
     {
         IEnumerable<IWebElement> elements = _loginPage.ElementsCollector();
         foreach(IWebElement element in elements) 
@@ -35,7 +35,7 @@ public class LoginTests
     [Test]
     [TestCase(LoginHelper.placeholderUsername, "user-name")]
     [TestCase(LoginHelper.placeholderPassword, "password")]
-    public void LoginFormPlaceholderTest(string expectedPlaceholder, string elementName)
+    public void LoginForm_PlaceholderText_IsCorrect(string expectedPlaceholder, string elementName)
     {
         IWebElement element = _driver.FindElement(By.Name(elementName));
         string actualPlaceholder = element.GetAttribute("placeholder");
@@ -46,7 +46,7 @@ public class LoginTests
     }
 
     [TestCaseSource(typeof(LoginPage), nameof(LoginPage.GetUsers))]
-    public void TestValidCredentials(LoginModel user)
+    public void Login_WhenCredentials_Valid(LoginModel user)
     {
         DateTime startTime = DateTime.Now;
 
@@ -68,7 +68,7 @@ public class LoginTests
     }
 
     [TestCaseSource(typeof(LoginPage), nameof(LoginPage.GetInvalidUsers))]
-    public void TestInvalidCredentials(LoginModel user)
+    public void Login_WhenCredentials_Invalid(LoginModel user)
     {
         _driver.Navigate().GoToUrl(LoginHelper.loginUrl);
         _loginPage.AttemptLogin(user.Username, user.Password);
