@@ -20,23 +20,24 @@ namespace SwagLabs.SpecFlow.Features.LoginPageFeatures
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Login Tests with Invalid Users")]
-    public partial class LoginTestsWithInvalidUsersFeature
+    [NUnit.Framework.DescriptionAttribute("Login Process")]
+    public partial class LoginProcessFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-#line 1 "LoginPageInvalidUsers.feature"
+#line 1 "LoginProcess.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/LoginPageFeatures", "Login Tests with Invalid Users", "  As a user\r\n  I want to verify that login with invalid credentials displays the " +
-                    "correct error messages\r\n  So that I can understand what went wrong", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/LoginPageFeatures", "Login Process", "  As a user\r\n  I want to verify the login functionality with valid and invalid cr" +
+                    "edentials\r\n  So that I can ensure users can log in successfully and see appropri" +
+                    "ate error messages", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -75,16 +76,18 @@ namespace SwagLabs.SpecFlow.Features.LoginPageFeatures
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Login with invalid credentials")]
-        [NUnit.Framework.CategoryAttribute("LoginPageInvalidTests")]
-        [NUnit.Framework.TestCaseAttribute("standard_user", "", "Epic sadface: Password is required", null)]
-        [NUnit.Framework.TestCaseAttribute("", "secret_sauce", "Epic sadface: Username is required", null)]
-        [NUnit.Framework.TestCaseAttribute("random_nonexistant_user", "secret_sauce", "Epic sadface: Username and password do not match any user in this service", null)]
-        [NUnit.Framework.TestCaseAttribute("standard_user", "random_wrong_password", "Epic sadface: Username and password do not match any user in this service", null)]
-        public void LoginWithInvalidCredentials(string username, string password, string expectedErrorMessage, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Login with valid credentials")]
+        [NUnit.Framework.CategoryAttribute("LoginPage")]
+        [NUnit.Framework.TestCaseAttribute("standard_user", "secret_sauce", "false", null)]
+        [NUnit.Framework.TestCaseAttribute("problem_user", "secret_sauce", "false", null)]
+        [NUnit.Framework.TestCaseAttribute("performance_glitch_user", "secret_sauce", "false", null)]
+        [NUnit.Framework.TestCaseAttribute("error_user", "secret_sauce", "false", null)]
+        [NUnit.Framework.TestCaseAttribute("visual_user", "secret_sauce", "false", null)]
+        [NUnit.Framework.TestCaseAttribute("locked_out_user", "secret_sauce", "true", null)]
+        public void LoginWithValidCredentials(string username, string password, string isLocked, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "LoginPageInvalidTests"};
+                    "LoginPage"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -93,8 +96,8 @@ namespace SwagLabs.SpecFlow.Features.LoginPageFeatures
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("username", username);
             argumentsOfScenario.Add("password", password);
-            argumentsOfScenario.Add("expectedErrorMessage", expectedErrorMessage);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login with invalid credentials", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            argumentsOfScenario.Add("isLocked", isLocked);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login with valid credentials", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 7
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -106,10 +109,57 @@ namespace SwagLabs.SpecFlow.Features.LoginPageFeatures
             {
                 this.ScenarioStart();
 #line 8
-    testRunner.Given("I navigated to the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("I navigate to the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 9
-    testRunner.When(string.Format("I attempt to login as user {0} {1} and expect message {2}", username, password, expectedErrorMessage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.When(string.Format("I attempt to login with valid credentials {0} and {1}", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 10
+    testRunner.Then(string.Format("the login should be successful if the user is not {0}", isLocked), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Login with invalid credentials")]
+        [NUnit.Framework.CategoryAttribute("LoginPage")]
+        [NUnit.Framework.TestCaseAttribute("standard_user", "", "Epic sadface: Password is required", null)]
+        [NUnit.Framework.TestCaseAttribute("", "secret_sauce", "Epic sadface: Username is required", null)]
+        [NUnit.Framework.TestCaseAttribute("random_nonexistant_user", "secret_sauce", "Epic sadface: Username and password do not match any user in this service", null)]
+        [NUnit.Framework.TestCaseAttribute("standard_user", "random_wrong_password", "Epic sadface: Username and password do not match any user in this service", null)]
+        public void LoginWithInvalidCredentials(string invalidUsername, string invalidPassword, string expectedErrorMessage, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "LoginPage"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("invalidUsername", invalidUsername);
+            argumentsOfScenario.Add("invalidPassword", invalidPassword);
+            argumentsOfScenario.Add("expectedErrorMessage", expectedErrorMessage);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login with invalid credentials", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 21
+  this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 22
+    testRunner.Given("I navigate to the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 23
+    testRunner.When(string.Format("I attempt to login with invalid credentials {0} and {1}", invalidUsername, invalidPassword), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 24
+    testRunner.Then(string.Format("I should see the error message {0}", expectedErrorMessage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -1,5 +1,4 @@
-﻿using NUnit.Framework.Legacy;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SwagLabsTestingApp.PageObjectModels;
@@ -57,7 +56,7 @@ public class HomeTests
 
     [Test]
     public void AllItems_AddAndRemove_FromCart()
-    {        
+    {
         AddItemsToCart();
         RemoveItemsFromCart();
     }
@@ -123,13 +122,13 @@ public class HomeTests
     [Test]
     public void ResetAppState_MainMenu_IsClickable()
     {
-        AddItemsToCart();        
-        MainMenuButtonClicker(_homePage.ResetAppStateMainMenu);        
+        AddItemsToCart();
+        MainMenuButtonClicker(_homePage.ResetAppStateMainMenu);
 
         Assert.That(_driver.Url, Is.EqualTo(HomeHelper.inventoryUrl), "Unexpected URL after clicking Reset App State menu item.");
         int cartItemCount = _homePage.GetCartItemCount();
         int expectedItemCount = 0;
-        Assert.That(cartItemCount, Is.EqualTo(expectedItemCount), "There is an issue with the Reset App State");        
+        Assert.That(cartItemCount, Is.EqualTo(expectedItemCount), "There is an issue with the Reset App State");
     }
 
     [TearDown]
@@ -218,6 +217,6 @@ public class HomeTests
         Assert.That(dropdownButton.Enabled, "The element is not enabled");
         dropdownButton.Click();
     }
-    
+
     #endregion
 }

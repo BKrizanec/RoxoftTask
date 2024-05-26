@@ -47,7 +47,7 @@ namespace SwagLabsTestingApp.Pages
             List<LoginModel> users = new List<LoginModel>()
             {
                 new LoginModel { Username = "standard_user", Password = LoginHelper.password, IsLocked = false },
-                new LoginModel { Username = "locked_out_user", Password = LoginHelper.password, IsLocked = true },
+                new LoginModel { Username = "locked_out_user", Password = LoginHelper.password, IsLocked = true, ExpectedErrorMessage = LoginHelper.lockedOutMessage },
                 new LoginModel { Username = "problem_user", Password = LoginHelper.password, IsLocked = false },
                 new LoginModel { Username = "performance_glitch_user", Password = LoginHelper.password, IsLocked = false },
                 new LoginModel { Username = "error_user", Password = LoginHelper.password, IsLocked = false },

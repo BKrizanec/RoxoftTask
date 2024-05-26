@@ -20,8 +20,8 @@ namespace SwagLabs.SpecFlow.Features.LoginPageFeatures
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Login Page Elements")]
-    public partial class LoginPageElementsFeature
+    [NUnit.Framework.DescriptionAttribute("Login Page Basic Functionality")]
+    public partial class LoginPageBasicFunctionalityFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -35,8 +35,8 @@ namespace SwagLabs.SpecFlow.Features.LoginPageFeatures
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/LoginPageFeatures", "Login Page Elements", "  As a user\r\n  I want to ensure the login page elements are correctly displayed\r\n" +
-                    "  So that I can interact with the login form", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/LoginPageFeatures", "Login Page Basic Functionality", "  As a user\r\n  I want to ensure that the login page elements and functionality wo" +
+                    "rk correctly\r\n  So that I can attempt to log in successfully", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,23 +74,25 @@ namespace SwagLabs.SpecFlow.Features.LoginPageFeatures
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 6
-  #line hidden
-#line 7
-    testRunner.Given("I am on the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-        }
-        
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Login form elements are displayed")]
-        public void LoginFormElementsAreDisplayed()
+        [NUnit.Framework.DescriptionAttribute("Verify login page elements and functionality")]
+        [NUnit.Framework.CategoryAttribute("LoginPageElements")]
+        [NUnit.Framework.TestCaseAttribute("Username", "user-name", null)]
+        [NUnit.Framework.TestCaseAttribute("Password", "password", null)]
+        public void VerifyLoginPageElementsAndFunctionality(string expectedPlaceholder, string elementName, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] @__tags = new string[] {
+                    "LoginPageElements"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login form elements are displayed", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 9
+            argumentsOfScenario.Add("expectedPlaceholder", expectedPlaceholder);
+            argumentsOfScenario.Add("elementName", elementName);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify login page elements and functionality", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 7
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -100,11 +102,14 @@ namespace SwagLabs.SpecFlow.Features.LoginPageFeatures
             else
             {
                 this.ScenarioStart();
-#line 6
-  this.FeatureBackground();
+#line 9
+    testRunner.Given("I open the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 10
     testRunner.Then("the login form elements should be displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 11
+    testRunner.And(string.Format("the placeholder text for the {0} field should be {1}", expectedPlaceholder, elementName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

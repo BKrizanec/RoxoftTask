@@ -1,10 +1,16 @@
-﻿Feature: Login Page Elements
+﻿Feature: Login Page Basic Functionality
   As a user
-  I want to ensure the login page elements are correctly displayed
-  So that I can interact with the login form
+  I want to ensure that the login page elements and functionality work correctly
+  So that I can attempt to log in successfully
 
-  Background:
-    Given I am on the login page
+  @LoginPageElements
+  Scenario Outline: Verify login page elements and functionality
 
-  Scenario: Login form elements are displayed
+    Given I open the login page
     Then the login form elements should be displayed
+    And the placeholder text for the <expectedPlaceholder> field should be <elementName>
+
+    Examples:
+      | expectedPlaceholder | elementName |
+      | Username            | user-name  |
+      | Password            | password   |
