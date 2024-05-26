@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework.Legacy;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SwagLabsTestingApp.PageObjectModels;
@@ -187,7 +188,7 @@ public class HomeTests
             var sortedItemNames = value == HomeHelper.SortingOptions["NameAscending"] ?
                                   itemNames.OrderBy(x => x).ToList() :
                                   itemNames.OrderByDescending(x => x).ToList();
-            CollectionAssert.AreEqual(sortedItemNames, itemNames);
+            Assert.That(sortedItemNames, Is.EqualTo(itemNames));
         }
         else if (value == HomeHelper.SortingOptions["PriceLowToHigh"] || value == HomeHelper.SortingOptions["PriceHighToLow"])
         {
@@ -195,7 +196,7 @@ public class HomeTests
             var sortedItemPrices = value == HomeHelper.SortingOptions["PriceLowToHigh"] ?
                                    itemPrices.OrderBy(p => p).ToList() :
                                    itemPrices.OrderByDescending(p => p).ToList();
-            CollectionAssert.AreEqual(sortedItemPrices, itemPrices);
+            Assert.That(sortedItemPrices, Is.EqualTo(itemPrices));
         }
     }
 

@@ -2,7 +2,7 @@
 
 namespace SwagLabsTestingApp.PageObjectModels;
 
-public class HomeModel
+public struct HomeModel
 {
     public IWebElement ItemDescription { get; set; }
     public IWebElement ItemImage { get; set; }

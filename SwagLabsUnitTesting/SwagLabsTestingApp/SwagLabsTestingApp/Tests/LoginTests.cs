@@ -59,9 +59,9 @@ public class LoginTests
         bool isLoggedIn = _driver.Url.Contains(LoginHelper.successfulLoginEndpoint);
 
         if (user.IsLocked)
-            Assert.IsFalse(isLoggedIn, $"{user.InfoText}");
+            Assert.That(isLoggedIn, Is.False, $"{user.InfoText}");
         else
-            Assert.IsTrue(isLoggedIn, $"{user.InfoText}");
+            Assert.That(isLoggedIn, Is.True, $"{user.InfoText}");
 
         if(loginTime.TotalSeconds > LoginHelper.acceptableLoginProcess)
             Console.WriteLine($"CAUTION: The login time for {user.Username} excedeed the acceptable limit. There may be performance issues.");
