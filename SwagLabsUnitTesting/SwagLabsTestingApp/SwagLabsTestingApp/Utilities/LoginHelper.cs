@@ -6,7 +6,7 @@ public static class LoginHelper
     public const string password = "secret_sauce";
     public const string lockedOut = "locked_out_user";
     public const string loginUrl = "https://www.saucedemo.com/";
-    public const string successfulLoginEndpoint = "/inventory.html";
+    public const string successfulLoginEndpoint = "inventory.html";
     public const string placeholderUsername = "Username";
     public const string placeholderPassword = "Password";
     public const string errorMessageContainer = "error-message-container";
